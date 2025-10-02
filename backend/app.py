@@ -1,11 +1,13 @@
 from flask import Flask
+
 from flask_cors import CORS
-from backend.config import Config
-from backend.database import db
-from backend.routes.auth import auth_bp
-from backend.routes.complaints import complaints_bp
-from backend.routes.admin import admin_bp
-from backend.routes.faq import faq_bp
+from config import Config
+from database import db
+from routes.auth import auth_bp
+from routes.complaints import complaints_bp
+from routes.admin import admin_bp
+from routes.faq import faq_bp
+
 
 def create_app():
     app = Flask(__name__, instance_relative_config=True)
