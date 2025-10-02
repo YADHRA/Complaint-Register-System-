@@ -10,8 +10,8 @@ export default function App() {
 
   if (!user) {
     return showRegister
-      ? <Register onRegister={() => setShowRegister(false)} />
-      : <Login onLogin={setUser} />;
+      ? <Register onRegister={() => setShowRegister(false)} onSwitchToLogin={() => setShowRegister(false)} />
+      : <Login onLogin={setUser} onSwitchToRegister={() => setShowRegister(true)} />;
   }
 
   if (user.role === 'admin') {
