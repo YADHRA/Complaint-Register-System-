@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
-from models import Complaint
-from database import db
+from backend.models import Complaint
+from backend.database import db
 
 admin_bp = Blueprint('admin', __name__)
 

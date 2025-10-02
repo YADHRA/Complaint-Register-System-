@@ -1,8 +1,8 @@
 import uuid
 from flask import Blueprint, request, jsonify
-from models import Complaint, FAQ
-from database import db
-from utils.nlp import categorize_complaint
+from backend.models import Complaint, FAQ
+from backend.database import db
+from backend.utils.nlp import categorize_complaint
 
 complaints_bp = Blueprint('complaints', __name__)
 

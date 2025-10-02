@@ -1,6 +1,6 @@
-from models import User
-from database import db
-from utils.auth import hash_password, verify_password
+from backend.models import User
+from backend.database import db
+from backend.utils.auth import hash_password, verify_password
 from flask import Blueprint, request, jsonify
 auth_bp = Blueprint('auth', __name__)
 @auth_bp.route('/register', methods=['POST'])
