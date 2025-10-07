@@ -12,8 +12,6 @@ with app.app_context():
         db.session.add(admin)
     if not User.query.filter_by(username="alice").first():
         alice = User(username="alice", password=hash_password("alice123"))
-        db.session.add(alice)
-        db.session.commit()
         c1 = Complaint(
             id=str(uuid.uuid4()),
             user_id=alice.id,
@@ -21,6 +19,7 @@ with app.app_context():
             description="Lights not working in room",
             status="Pending"
         )
+        db.session.add(alice)
         db.session.add(c1)
     if not FAQ.query.first():
         faq = FAQ(
