@@ -36,7 +36,7 @@ export default function AdminDashboard() {
       </div>
       <div className="card">
         <h3>Complaints</h3>
-        <table style={{width:'100%', color:'#f5f5f5'}}>
+        <table style={{width:'100%', color:'#c54646ff'}}>
           <thead>
             <tr>
               <th>ID</th><th>User</th><th>Type</th><th>Status</th><th>Action</th>

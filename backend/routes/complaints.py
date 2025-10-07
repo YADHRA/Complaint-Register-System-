@@ -3,13 +3,10 @@ from flask import Blueprint, request, jsonify
 from backend.models import Complaint, FAQ
 from backend.database import db
 from backend.utils.nlp import categorize_complaint
-
 complaints_bp = Blueprint('complaints', __name__)
-
 def suggest_solution(text):
     text_lower = text.lower()
     category = categorize_complaint(text)
-    
     # Specific solution mappings based on common complaint keywords
     solutions = {
         'id card': "For lost ID card: 1) Visit the ID Card Section in the Administration Building. 2) File a complaint form with your details. 3) Pay the replacement fee if applicable. 4) Collect your new ID card within 3-5 working days. You may need to bring your fee receipt and a passport-sized photo.",
@@ -32,12 +29,10 @@ def suggest_solution(text):
         'food': "For mess/food complaints: 1) Contact the Mess Committee Representative. 2) Visit the Chief Warden's Office with your complaint. 3) For food quality issues, submit a written complaint. 4) Mess Committee meets every Friday at 5 PM. 5) Email: mess@institution.edu.",
         'canteen': "For canteen issues: 1) Speak with the Canteen Manager. 2) For serious complaints, contact the Chief Warden. 3) For food quality concerns, report to the Student Welfare Office. 4) Feedback box available at the canteen entrance.",
     }
-    
     # Check for keyword matches
     for keyword, solution in solutions.items():
         if keyword in text_lower:
             return solution
-    
     # Category-based fallback solutions
     category_solutions = {
         'academic': "For academic issues: 1) Contact your Course Instructor or Academic Advisor. 2) Visit the Academic Section in your Department. 3) For serious concerns, email the Head of Department. 4) Office hours: Mon-Fri 10 AM - 4 PM.",
@@ -46,7 +41,6 @@ def suggest_solution(text):
         'transport': "For transport-related issues: 1) Visit the Transport Office in Admin Building. 2) For route/timing information, check the notice board. 3) For bus pass issues, bring your student ID and photo. 4) Call Transport Office: +XX-XXXX-XXXX.",
         'administration': "For administrative issues: 1) Visit the relevant section in the Administration Building. 2) Bring necessary documents and your student ID. 3) For document-related queries, contact the Administrative Office. 4) Office hours: Mon-Fri 10 AM - 4 PM.",
     }
-    
     if category in category_solutions:
         return category_solutions[category]
     
@@ -68,7 +62,6 @@ def submit_complaint():
     db.session.add(complaint)
     db.session.commit()
     return jsonify({'complaint_id': complaint_id, 'category': category, 'solution': solution})
-
 @complaints_bp.route('/<int:user_id>', methods=['GET'])
 def get_complaints(user_id):
     complaints = Complaint.query.filter_by(user_id=user_id).all()
@@ -81,7 +74,6 @@ def get_complaints(user_id):
         'created_at': c.created_at,
         'updated_at': c.updated_at
     } for c in complaints])
-
 @complaints_bp.route('/status/<complaint_id>', methods=['GET'])
 def complaint_status(complaint_id):
     complaint = Complaint.query.get(complaint_id)
